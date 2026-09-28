@@ -1,0 +1,115 @@
+/* Shared item system, based on the Kỹ thuật phần mềm page. */
+:root {
+  --rma-item-blue: #001c80;
+  --rma-item-blue-mid: #0034c2;
+  --rma-item-pale: #f0f4ff;
+  --rma-item-light: #e6eeff;
+  --rma-item-text: #0f172a;
+  --rma-item-muted: #64748b;
+  --rma-item-border: #e2e8f0;
+  --rma-item-shadow: 0 8px 24px rgba(15, 23, 42, .07);
+}
+
+/* General cards */
+.card, .content, .sidebar-card {
+  border: 1px solid var(--rma-item-border) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--rma-item-shadow) !important;
+}
+
+.card, .content { padding: clamp(22px, 4vw, 32px) !important; }
+
+/* Projects and teams */
+.project-card, .team-card, .activity-card {
+  border: 1px solid var(--rma-item-border) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--rma-item-shadow) !important;
+  overflow: hidden;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease !important;
+}
+
+.project-card:hover, .team-card:hover, .activity-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: #b9c9ff !important;
+  box-shadow: 0 16px 32px rgba(0, 28, 128, .13) !important;
+}
+
+.project-card h3, .project-card h4, .team-card h3, .activity-card h3 {
+  color: var(--rma-item-text) !important;
+  letter-spacing: -.01em;
+}
+
+.project-card p, .team-card p, .activity-card p, .content p {
+  color: var(--rma-item-muted);
+}
+
+.project-card img, .activity-card-image {
+  transition: transform .35s ease;
+}
+.project-card:hover img, .activity-card:hover .activity-card-image { transform: scale(1.04); }
+
+.team-card .icon, .activity-card-icon, .project-card .proj-icon {
+  background: var(--rma-item-light) !important;
+  color: var(--rma-item-blue) !important;
+  border-radius: 14px !important;
+}
+
+/* Horizontal activity items */
+.activity-item {
+  border: 1px solid var(--rma-item-border) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, .04) !important;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease !important;
+}
+.activity-item:hover {
+  transform: translateY(-3px) !important;
+  border-color: #c3d0ff !important;
+  box-shadow: 0 12px 25px rgba(0, 28, 128, .10) !important;
+}
+.activity-item h3 { color: var(--rma-item-text) !important; }
+.activity-item p { color: var(--rma-item-muted) !important; }
+.activity-link, .activity-card-link {
+  color: var(--rma-item-blue) !important;
+  background: var(--rma-item-pale) !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+}
+.activity-link:hover, .activity-card-link:hover {
+  background: var(--rma-item-blue) !important;
+  color: #fff !important;
+}
+
+/* Form controls */
+form input, form select, form textarea {
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  transition: border-color .2s, box-shadow .2s !important;
+}
+form input:focus, form select:focus, form textarea:focus {
+  outline: 0;
+  border-color: var(--rma-item-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0, 28, 128, .12) !important;
+}
+form button, .btn {
+  border-radius: 10px !important;
+  background: var(--rma-item-blue) !important;
+  box-shadow: 0 6px 14px rgba(0, 28, 128, .18);
+}
+form button:hover, .btn:hover { background: var(--rma-item-blue-mid) !important; transform: translateY(-1px); }
+
+/* Status tags and image galleries */
+.project-card .proj-badge, .activity-card-badge, .activity-card-tag, .hero-tag, .stack-pill {
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+.gallery img {
+  border: 1px solid var(--rma-item-border);
+  box-shadow: var(--rma-item-shadow);
+}
+
+@media (max-width: 640px) {
+  .card, .content { border-radius: 14px !important; }
+  .activity-item { padding: 16px !important; }
+}

@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câu lạc bộ Robot & Toán học Ứng dụng - RMA CLUB</title>
+  <meta name="description" content="RMA CLUB - Câu lạc bộ Robot & Toán học Ứng dụng tại THPT Thống Linh. Nơi nuôi dưỡng đam mê khoa học, robotics, lập trình và sáng tạo.">
+  <meta property="og:image" content="https://tlclass.github.io/RMA.Club.ThongLinh/img/RMA.png">
+  <meta property="og:url" content="https://tlclass.github.io/RMA.Club.ThongLinh/">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+  <link rel="icon" href="img/logo-rma-png.png"  type="image/png">
+
+  <style>
+    /* Reset & Cơ bản */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #333; background: #f4f6fb; }
+    img { max-width: 100%; display: block; }
+
+    /* Container */
+    .container { width: 90%; max-width: 1200px; margin: auto;}
+
+    /* Header */
+    header { background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.1); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+    header h1 { color: #001c80; font-size: 26px; font-weight: 700; letter-spacing: 1px; }
+    nav ul { list-style: none; display: flex; gap: 25px; }
+    nav a { text-decoration: none; color: #333; font-weight: 500; transition: .3s; }
+    nav a:hover { color: #001c80; }
+    .menu-toggle { display: none; cursor: pointer; font-size: 24px; }
+
+    /* Hero */
+    .hero {
+      background: url('img/banner-hero.jpg') center/cover no-repeat;
+      min-height: 65vh; display: flex; align-items: center; justify-content: center;
+      position: relative; color: #fff; text-align: center;
+    }
+    .hero::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.55); }
+    .hero-content { position: relative; z-index: 1; padding: 0 20px; }
+    .hero h2 { font-size: 42px; margin-bottom: 15px; }
+    .hero p { font-size: 18px; margin-bottom: 25px; }
+    .btn { display: inline-block; background: #001c80; color: #fff; padding: 12px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; transition: .3s; }
+    .btn:hover { background: #0034c2; }
+
+    /* Section */
+    section { padding: 60px 20px; }
+    .section-title {
+      text-align: center; font-size: 30px; color: #001c80; margin-bottom: 40px; position: relative;
+    }
+    .section-title::after {
+      content: ""; width: 60px; height: 3px; background: #001c80;
+      display: block; margin: 10px auto 0; border-radius: 2px;
+    }
+
+    /* Mục tiêu & Tham gia */
+    .flex { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+    .card {
+      background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 3px 12px rgba(0,0,0,.1);
+      flex: 1; min-width: 280px; transition: .3s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    form label { display: block; margin: 12px 0 6px; font-weight: 600; }
+    form input {
+      width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px;
+    }
+    form button {
+      margin-top: 15px; padding: 12px; width: 100%; background: #001c80; color: #fff;
+      font-size: 16px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; transition: .3s;
+    }
+    form button:hover { background: #0034c2; }
+
+    /* Hoạt động */
+    .gallery {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px; padding: 10px;
+    }
+    .gallery img {
+      border-radius: 14px; object-fit: cover; height: 200px; width: 100%;
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .gallery img:hover { transform: scale(1.07); box-shadow: 0 10px 25px rgba(0,0,0,0.25); }
+
+    /* Dự án */
+    .projects {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .project-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,.12); transition: transform .3s ease, box-shadow .3s ease;
+      display: flex; flex-direction: column;
+    }
+    .project-card img {
+      width: 100%; height: 200px; object-fit: cover; transition: transform .4s ease;
+    }
+    .project-card:hover img { transform: scale(1.05); }
+    .project-card .info { padding: 15px; flex-grow: 1; }
+    .project-card h3 { font-size: 20px; margin-bottom: 10px; color: #001c80; }
+    .project-card p { font-size: 15px; color: #555; }
+    .project-card a {
+      margin-top: auto; display: block; text-align: center; padding: 14px;
+      background: #001c80; color: #fff; text-decoration: none; font-weight: 600;
+      letter-spacing: .5px; transition: background .3s;
+    }
+    .project-card a:hover { background: #0034c2; }
+
+    /* Footer */
+    footer { background: #252935; color: #fff; padding: 50px 20px; text-align: center; }
+    footer .footer-container { max-width: 1200px; margin: auto; }
+    footer h3 { margin-bottom: 15px; font-size: 20px; font-weight: 700; }
+    footer p, footer a { font-size: 15px; }
+    footer nav { margin: 15px 0; }
+    footer nav ul {
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; list-style: none;
+    }
+    footer nav a { color: #fff; text-decoration: none; transition: color .3s; }
+    footer nav a:hover { color: #ffd700; }
+    footer .social { margin: 20px 0; }
+    footer .social a {
+      color: #fff; margin: 0 10px; font-size: 22px; transition: transform .3s, color .3s;
+    }
+    footer .social a:hover { transform: translateY(-4px); color: #ffd700; }
+    footer small { display: block; margin-top: 20px; font-size: 14px; opacity: .8; }
+
+    /* Search Bar */
+    .search-container {
+      background: #fff;
+      padding: 15px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+      position: sticky;
+      top: 70px;
+      z-index: 999;
+    }
+    .search-box {
+      display: flex;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 14px 50px 14px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 50px;
+      font-size: 15px;
+      outline: none;
+      transition: all .3s ease;
+      background: #f8f9fa;
+    }
+    .search-box input:focus {
+      border-color: #001c80;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0, 28, 128, 0.1);
+    }
+    .search-box button {
+      position: absolute;
+      right: 35px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #001c80;
+      color: #fff;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-box button:hover {
+      background: #0034c2;
+      transform: translateY(-50%) scale(1.05);
+    }
+    .search-results {
+      max-width: 800px;
+      margin: 10px auto 0;
+      padding: 0 20px;
+      display: none;
+    }
+    .search-results.active {
+      display: block;
+    }
+    .search-result-item {
+      background: #fff;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      cursor: pointer;
+      transition: all .3s ease;
+      border-left: 4px solid #001c80;
+    }
+    .search-result-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0,28,128,.15);
+    }
+    .search-result-item h4 {
+      color: #001c80;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+    .search-result-item p {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Responsive */
+    @media(max-width:768px) {
+      nav ul {
+        flex-direction: column; position: absolute; top: 65px; right: 0;
+        background: #fff; width: 220px; padding: 20px; display: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,.1);
+      }
+      nav ul.active { display: flex; }
+      .menu-toggle { display: block; color: #001c80; }
+      .hero h2 { font-size: 32px; }
+    }
+
+    /* Thông báo form */
+    .alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 15px;
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+    }
+
+    /* Thành công */
+    .alert-success {
+    background: #e6f9ed;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    }
+
+    /* Lỗi */
+    .alert-danger {
+    background: #fdecea;
+    color: #c62828;
+    border: 1px solid #f5c6cb;
+    }
+
+    /* Hiệu ứng mượt */
+    @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Club teams boxes */
+    .team-section { margin: 20px 0 30px; }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
+      align-items: stretch; justify-items: center; justify-content: center;
+      max-width: 1000px; margin: 0 auto; padding: 0 12px;
+    }
+    .team-card {
+      width: 100%;
+      background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+      border-radius: 12px; padding: 18px; box-shadow: 0 6px 20px rgba(2,6,23,.06);
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      text-decoration: none; color: inherit; transition: transform .28s ease, box-shadow .28s ease;
+    }
+    .team-card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(2,6,23,.12); }
+    .team-card .icon {
+      width: 64px; height: 64px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 26px; margin-bottom: 12px;
+      background: linear-gradient(135deg,#001c80,#0034c2);
+    }
+    .team-card h3 { color: #001c80; margin: 6px 0 8px; font-size: 18px; }
+    .team-card p { color: #556; font-size: 14px; line-height: 1.4; }
+
+    /* Banner carousel styles */
+    .banner-section { background: linear-gradient(180deg,#f5f6f8,#eef1f5); padding: 10px 0; }
+    .banner-wrap { max-width: 1000px; margin: 0 auto; padding: 8px; }
+    .banner-stage { position: relative; border-radius: 14px; overflow: hidden; max-width: 900px; margin: 0 auto; box-shadow: 0 12px 30px rgba(2,6,23,.06); aspect-ratio: 16 / 9; max-height: 320px; }
+    .banner-stage::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(800px 200px at 20% 10%, rgba(0,0,0,0.03), transparent 20%); }
+    .banner-slides { display: flex; height: 100%; transition: transform .8s cubic-bezier(.22,.9,.37,1); will-change: transform; }
+    .banner-slide { position: relative; flex: 0 0 100%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .banner-slide img { width: 100%; height: 100%; object-fit: cover; max-height: 320px; border-radius: 12px; box-shadow: 0 12px 30px rgba(2,6,23,.12); display:block; }
+    .banner-dots { display:flex; justify-content:center; gap:8px; margin-top:10px; }
+    .banner-dots .dot { width:10px; height:10px; border-radius:50%; background: rgba(0,0,0,0.12); cursor:pointer; transition: transform .2s ease, background .2s ease; }
+    .banner-dots .dot.active { background: #001c80; transform: scale(1.25); }
+
+    @media(max-width:720px){ .banner-wrap{padding:6px;} .banner-stage{border-radius:10px;} .banner-slide img{border-radius:10px;} }
+
+    /* Activities layout: 2 columns */
+    .activities-wrap { display: flex; gap: 28px; flex-wrap: wrap; align-items: stretch; }
+    .featured-activity { flex: 1 1 45%; min-width: 280px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,28,128,.12); transition: all .35s cubic-bezier(.25,.46,.45,.94); position: relative; display: flex; flex-direction: column; }
+    .featured-activity:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,28,128,.18); }
+    .featured-activity-img-wrap { position: relative; overflow: hidden; height: 200px; background: linear-gradient(135deg,#e3f2fd,#f5f7fa); }
+    .featured-activity img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; display: block; }
+    .featured-activity:hover img { transform: scale(1.05); }
+    .featured-activity-badge { position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg,#001c80,#0034c2); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .5px; }
+    .featured-activity-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(to top, rgba(0,28,128,.3), transparent); }
+    .featured-activity-content { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+    .featured-activity-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: #001c80; font-size: 12px; font-weight: 600; }
+    .featured-activity-icon { font-size: 16px; }
+    .featured-activity h3 { color: #001c80; margin-bottom: 8px; font-size: 17px; font-weight: 700; line-height: 1.3; }
+    .featured-activity p { color: #666; font-size: 13px; line-height: 1.45; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+    .featured-highlights { margin: 8px 0 12px 18px; padding: 0; color: #444; font-size: 13px; }
+    .featured-highlights li { margin-bottom: 6px; }
+    .featured-activity-meta span { margin-right: 10px; color: #0050b8; font-weight: 600; font-size: 12px; }
+    .featured-activity-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+    .featured-stats { color: #666; font-size: 13px; }
+    .featured-activity a { color: #001c80; text-decoration: none; font-weight: 700; font-size: 13px; transition: color .2s ease; display: flex; align-items: center; gap: 4px; }
+    .featured-activity a:hover { color: #0034c2; }
+
+    .activities-list { flex: 1 1 45%; min-width: 240px; }
+    .activity-item { background: #fff; padding: 12px 14px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,28,128,.06); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; border-left: 3px solid #001c80; }
+    .activity-item:hover { transform: translateX(4px); box-shadow: 0 3px 8px rgba(0,28,128,.1); }
+    .activity-item h4 { color: #001c80; font-size: 13px; margin-bottom: 3px; font-weight: 700; }
+    .activity-item p { color: #888; font-size: 12px; margin-bottom: 6px; line-height: 1.3; }
+    .activity-item a { color: #001c80; text-decoration: none; font-weight: 600; font-size: 12px; display: inline-block; transition: color .2s ease; }
+    .activity-item a:hover { color: #0034c2; }
+
+    .view-all-btn { text-align: center; margin-top: 16px; }
+    .view-all-btn a { display: inline-block; color: #001c80; text-decoration: none; font-weight: 700; font-size: 13px; padding: 8px 18px; border: 1.5px solid #001c80; border-radius: 6px; transition: all .3s ease; }
+    .view-all-btn a:hover { background: #001c80; color: #fff; }
+
+    @media(max-width:900px){ .activities-wrap { flex-direction: column; } .featured-activity, .activities-list { flex: 1 1 100%; } }
+
+    /* Tall vertical carousel (5 visible, 9:16 aspect) - all equal size, JS applies stagger transform */
+    .tall-carousel-section { padding: 40px 20px; }
+    .tall-carousel { width: 100%;
+                      max-width: 100%;
+                      overflow: hidden;
+                      position: relative; }
+    .tall-track { display: flex;
+                  align-items: flex-start;
+                  width: max-content;
+                  max-width: none;
+                  transition: transform .6s cubic-bezier(.22,.9,.35,1);
+                  will-change: transform; }
+    .tall-item { flex: 0 0 calc((100% - 48px) / 5); margin-right: 12px; }
+    .tall-item:last-child { margin-right: 0; }
+    .tall-item img { width: 100%; aspect-ratio: 9/16; object-fit: cover; border-radius: 10px; display: block; transition: transform .35s ease; }
+    .tall-item:hover img { transform: scale(1.04); }
+    @media(max-width:1100px){ .tall-item { flex: 0 0 calc((100% - 36px) / 4); } }
+    @media(max-width:800px){ .tall-item { flex: 0 0 calc((100% - 24px) / 3); } }
+    @media(max-width:520px){ .tall-item { flex: 0 0 calc((100% - 12px) / 2); } }
+
+    /* Scroll reveal animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Floating Chat Bubble */
+    .chat-bubble {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #001c80, #0034c2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 28, 128, 0.3);
+      transition: all .3s ease;
+      z-index: 999;
+      font-size: 28px;
+    }
+    .chat-bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 24px rgba(0, 28, 128, 0.4);
+    }
+    .chat-bubble:active {
+      transform: scale(0.95);
+    }
+    @media(max-width: 640px) {
+      .chat-bubble {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+      }
+    }
+
+    /* =========================================================
+   MOBILE OVERFLOW FIX
+   ========================================================= */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+.container {
+  width: min(90%, 1200px);
+  max-width: 100%;
+}
+
+.flex,
+.activities-wrap,
+.team-grid,
+.projects {
+  max-width: 100%;
+}
+
+.card,
+.featured-activity,
+.activities-list,
+.team-card,
+.project-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  section {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .container {
+    width: calc(100% - 24px);
+    max-width: 100%;
+  }
+
+  .flex {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .activities-wrap {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .featured-activity,
+  .activities-list {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+
+  .featured-activity-meta {
+    flex-wrap: wrap;
+  }
+
+  .featured-activity-footer {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .search-box button {
+    right: 20px;
+  }
+
+  .banner-wrap,
+  .banner-stage {
+    max-width: 100%;
+  }
+
+  .tall-carousel {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+   
+  </style>
+  <link rel="stylesheet" href="rma-header.css">
+  <link rel="stylesheet" href="rma-items.css">
+  <link rel="stylesheet" href="index-modern.css">
+  <link rel="stylesheet" href="index-polish.css">
+</head>
+
+<body>
+
+  <!-- Header style="background-image: url(img/texture3.png);" -->
+
+  <!-- Header style="background-image: url(img/texture3.png);" -->
+  
+  
+
+
+
+  <div class="rma-topbar">Câu lạc bộ Robot &amp; Toán học Ứng dụng - THPT Thống Linh &nbsp;·&nbsp; rmathonglinh@gmail.com</div>
+<header class="rma-site-header">
+  <div class="rma-header-inner">
+    <a class="rma-logo" href="index.html">RMA CLUB <span class="rma-logo-badge">TL</span></a>
+    <button class="rma-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    <nav class="rma-nav" aria-label="Menu chính">
+      <a href="index.html" class="active">Trang chủ</a>
+      <a href="thongtin.html">Thông tin</a>
+      <a href="danh-sach-hoat-dong.html">Hoạt động</a>
+      <a href="duan.html">Dự án</a>
+      <a href="thamgia.html">Tham gia</a>
+    </nav>
+  </div>
+</header>
+
+  <!-- Hero -->
+  <section class="home-hero">
+  <div class="hero-content">
+    <span class="hero-kicker" style="color: white;"><i class="fas fa-atom"></i> RMA CLUB · THPT Thống Linh</span>
+    <h2 style="color: white;">Nơi ý tưởng công nghệ trở thành <em>hiện thực</em>.</h2>
+    <p style="color: white;">Khám phá robot, lập trình, toán học ứng dụng và STEM trong một cộng đồng luôn sẵn sàng cùng bạn thử nghiệm, sáng tạo và vươn xa.</p>
+    <a href="thamgia.html" class="btn">Tham gia cùng RMA <i class="fas fa-arrow-right" style="margin-left:8px"></i></a>
+    <div class="home-stats" aria-label="Điểm nổi bật RMA CLUB">
+      <span class="home-stat"><strong>4</strong> nhóm chuyên môn</span>
+      <span class="home-stat"><strong>STEM</strong> học qua thực hành</span>
+      <span class="home-stat"><strong>ORC</strong> sân chơi robot</span>
+    </div>
+  </div>
+</section>
+<main class="home-main">
+
+
+
+ 
+
+  <div class="container" style="overflow: hidden; position: relative; max-width: 1200px; height: 50px; background-color: #001c80; box-shadow: 0 3px 12px rgba(0, 0, 0, .1); border-radius: 12px; margin-top: 20px; display: flex; align-items: center; padding: 0 10px;">
+    <i class="fas fa-cog" style="color: #fff;"></i> <p style="margin-left: 10px; color: #fff;">Mục Tiêu - Tham Gia</p>
+    <div style="position: absolute; width: 10px; height: 70px; background-color: white; rotate: 20deg; right: 10px;"></div>
+    <div style="position: absolute; width: 10px; height: 70px; background-color: white; rotate: 20deg; right: 30px;"></div>
+    <div style="position: absolute; width: 10px; height: 70px; background-color: white; rotate: 20deg; right: 50px;"></div>
+  </div>
+
+  <!-- Mục tiêu & Form -->
+  <section id="thamgia" class="container" style="padding: 20px 0px;">
+    <!--<h2 class="section-title">Mục tiêu & Tham gia</h2>-->
+    <div class="flex">
+      <div class="card">
+        <h3>Mục tiêu</h3>
+        <p>
+          CLB thúc đẩy niềm đam mê khoa học, robotics, lập trình và ứng dụng toán học. 
+          Thành viên được rèn luyện tư duy logic, giải quyết vấn đề, làm việc nhóm 
+          và tham gia các dự án thực tế.
+        </p>
+        <img src="img/RMA.png" alt="Logo CLB RMA" style="border-radius:7px; margin-top:7px; width: 100%; max-width: 300px; display: block; margin-left: auto; margin-right: auto;">
+      </div>
+
+      <div class="card">
+        <h3>Đăng ký tham gia</h3>
+        <form id="submit_form">
+            <label for="hoTen">Họ và tên</label>
+            <input type="text" id="hoTen" name="hoTen" required>
+
+            <label for="lopHoc">Lớp học</label>
+            <input type="text" id="lopHoc" name="lopHoc" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="sdt">Số điện thoại (Zalo)</label>
+            <input type="tel" id="sdt" name="soDienThoai" pattern="[0-9]{10,11}" required>
+
+            <button type="submit">Gửi thông tin</button>
+        </form>
+        <!-- Thêm chỗ hiển thị thông báo -->
+        <div class="msg"></div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title" style="color: #001c80; padding: 20px 0 0;">Club teams</h2>
+
+
+  <!-- Club teams boxes -->
+   <center>
+  <section class="container team-section" aria-label="Club teams" style="max-width:1200px; padding: 0px;">
+    <div class="team-grid" aria-label="Danh sách các nhóm trong CLB" >
+      <a class="team-card" href="ky-thuat-phan-mem.html" aria-label="Kĩ thuật phần mềm">
+        <div class="icon"><i class="fas fa-code"></i></div>
+        <h3>Kĩ thuật phần mềm</h3>
+        <p>Phát triển ứng dụng, lập trình và các dự án phần mềm của CLB.</p>
+      </a>
+
+      <a class="team-card" href="ky-thuat-phan-cung.html" aria-label="Kĩ thuật phần cứng">
+        <div class="icon"><i class="fas fa-microchip"></i></div>
+        <h3>Kĩ thuật phần cứng</h3>
+        <p>Chế tạo, sửa chữa robot và thiết kế mạch điện tử.</p>
+      </a>
+
+      <a class="team-card" href="khoa-hoc-stem.html" aria-label="Khoa học STEM">
+        <div class="icon"><i class="fas fa-flask"></i></div>
+        <h3>Khoa học STEM</h3>
+        <p>Workshop và nghiên cứu khoa học, thí nghiệm sáng tạo.</p>
+      </a>
+
+      <a class="team-card" href="truyen-thong-hinh-anh.html" aria-label="Truyền thông hình ảnh">
+        <div class="icon"><i class="fas fa-camera-retro"></i></div>
+        <h3>Truyền thông hình ảnh</h3>
+        <p>Quay phim, chụp ảnh, dựng video và truyền thông các hoạt động CLB.</p>
+      </a>
+    </div>
+  </section>
+  </center>
+
+  <!-- chạy banner -->
+  <!-- Rotating banner section -->
+  <section class="banner-section" aria-label="Băng hình nổi bật" style="padding-top:25px; padding-bottom:18px; background: linear-gradient(180deg,#003fbd,#f4f6fb);">
+    <div class="banner-wrap">
+      <div class="banner-stage">
+        <div class="banner-slides">
+          <div class="banner-slide">
+            <img src="img/1.png" alt="Banner 1">
+          </div>
+          <div class="banner-slide">
+            <img src="img/2.png" alt="Banner 2">
+          </div>
+          <div class="banner-slide">
+            <img src="img/3.png" alt="Banner 3">
+          </div>
+          <div class="banner-slide">
+            <img src="img/4.png" alt="Banner 4">
+          </div>
+        </div>
+      </div>
+      <div class="banner-dots" role="tablist" aria-label="Banner navigation"></div>
+    </div>
+  </section>
+
+  <!-- Hoạt động -->
+
+    <div class="container" style="overflow: hidden; position: relative; max-width: 1200px; height: 50px; background-color: white; box-shadow: 0 3px 12px rgba(0, 0, 0, .1); border-radius: 12px; margin-top: 0px; margin-bottom: 20px; display: flex; align-items: center; padding: 0 10px;">
+    <i class="fas fa-cog" style="color: #001c80;"></i> <p style="margin-left: 10px; color: #001c80;">Hoạt động</p>
+    <div style="position: absolute; width: 10px; height: 70px; background-color: #001c80; rotate: 20deg; right: 10px;"></div>
+    <div style="position: absolute; width: 10px; height: 70px; background-color: #001c80; rotate: 20deg; right: 30px;"></div>
+    <div style="position: absolute; width: 10px; height: 70px; background-color: #001c80; rotate: 20deg; right: 50px;"></div>
+  </div>
+
+  <!--
+
+  <section class="container" style="margin-bottom: 20px; background-color: #fff; max-width: 1200px; padding: 20px; border-radius: 12px; box-shadow: 0 3px 12px rgba(0, 0, 0, .1);">
+    <h2 style="color:#001c80; margin-bottom: 10px;">Cuộc thi Open Robotics Challenge (ORC) Đồng Tháp 2024 – 2025</h2>
+  
+    <p style="margin: 10px 0; line-height: 1.6;">
+      Ngày <b>23/11/2024</b>, tại <b>Trường THPT Thống Linh</b> đã diễn ra <b>Cuộc thi Open Robotics Challenge (ORC) khu vực Đồng Tháp lần thứ nhất</b>. 
+      Sự kiện do <b>Trường THPT Thống Linh</b> phối hợp cùng <b>Viện Nghiên cứu Thiết kế Trường học</b>, <b>Bộ GD&ĐT</b> và <b>Công ty AITT</b> tổ chức. 
+    </p>
+  
+    <center><img src="img/ORC1.jpg" style="width: 100%; max-width: 700px; height: auto; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt=""></center>
+    
+    <p style="margin: 10px 0; line-height: 1.6;">
+      Cuộc thi quy tụ <b>20 đội thi đến từ 10 trường THPT</b> trong tỉnh, thi đấu đối kháng với nhiệm vụ 
+      <i>điều khiển robot di chuyển và xếp khối trong 150 giây</i>. 
+      Mục tiêu của cuộc thi là <b>thúc đẩy tư duy sáng tạo, khoa học – công nghệ, và kỹ năng tiếp cận CMCN 4.0 cho học sinh</b>.
+    </p>
+
+    <h3 style="color:#001c80; margin-top: 15px;">Kết quả cuộc thi</h3>
+    <p style="margin: 10px 0; line-height: 1.6;">
+      Đội tuyển trong CLB RMA trường THPT Thống Linh Đạt <b>Huy chương bạc - Giải Nhì</b>.
+      
+    </p>
+    
+    <center>
+      <div style="position: relative; width: 100%; max-width: 900px; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
+        <iframe 
+          src="https://www.youtube.com/embed/o45aCAnyOLw" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen 
+          style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;">
+        </iframe>
+      </div>
+    </center>
+
+    <p style="margin: 10px 0; line-height: 1.6;">
+      Thành tích tại cuộc thi Open Robotics Challenge lần thứ nhất là minh chứng rõ nét cho sự cố gắng và nỗ lực không ngừng của Câu lạc bộ RMA – Trường THPT Thống Linh. Đây không chỉ là niềm tự hào của nhà trường mà còn là nguồn cảm hứng để thầy và trò tiếp tục lan tỏa tinh thần học hỏi, sáng tạo và chinh phục công nghệ. Nhà trường tin tưởng rằng, Câu lạc bộ RMA sẽ ngày càng phát triển mạnh mẽ, trở thành môi trường học tập – nghiên cứu bổ ích, góp phần khẳng định thương hiệu và uy tín của THPT Thống Linh trong các sân chơi trí tuệ trong và ngoài tỉnh.
+    </p>
+    <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-around;">
+      <img src="img/ORC2.JPG" style="height:100%; width: auto; max-height: 300px; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt="">
+      <img src="img/ORC3.JPG" style="width: 100%; width: auto; max-height: 300px; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt="">
+      <img src="img/ORC4.JPG" style="width: 100%; width: auto; max-height: 300px; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt="">
+      <img src="img/ORC5.JPG" style="width: 100%; width: auto; max-height: 300px; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt="">
+      <img src="img/ORC6.JPG" style="width: 100%; width: auto; max-height: 300px; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt="">
+      <img src="img/ORC7.JPG" style="width: 100%; width: auto; max-height: 300px; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt="">
+      <img src="img/ORC8.JPG" style="width: 100%; width: auto; max-height: 300px; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt="">
+      <img src="img/ORC9.JPG" style="width: 100%; width: auto; max-height: 300px; border-radius: 12px; margin-bottom: 20px; margin-top: 20px;" alt="">
+    </div>
+  </section>
+
+-->
+
+
+
+  <section class="container scroll-reveal" style="background-color: transparent; max-width: 1200px; padding: 20px 0 0; border-radius: 12px;  margin-bottom: 40px;">
+    <div class="activities-wrap">
+      <!-- Featured activity (left) -->
+      <div class="featured-activity">
+        <div class="featured-activity-img-wrap">
+          <img src="img/ORC1.jpg" alt="Cuộc thi ORC">
+          <div class="featured-activity-badge">🏆 Nổi bật</div>
+          <div class="featured-activity-overlay"></div>
+        </div>
+        <div class="featured-activity-content">
+          <div class="featured-activity-meta">
+            <span class="meta-type">Sự kiện CLB</span>
+            <span class="meta-date">23/11/2024</span>
+            <span class="meta-place">Trường THPT Thống Linh</span>
+          </div>
+          <h3>Cuộc thi Open Robotics Challenge (ORC)</h3>
+          <p>Ngày 23/11/2024, diễn ra Cuộc thi Open Robotics Challenge khu vực Đồng Tháp. Đội tuyển RMA đạt Huy chương bạc - Giải Nhì. Sự kiện quy tụ nhiều đội tuyển từ các trường trong khu vực, gồm vòng thi thực hành robot, thuyết trình dự án và workshop kỹ thuật.</p>
+          <ul class="featured-highlights">
+            <li>Giải Nhì - Huy chương bạc</li>
+            <li>Trình diễn robot tự hành</li>
+            <li>Workshop kỹ thuật &amp; lập trình</li>
+          </ul>
+          <div class="featured-activity-footer">
+            <div class="featured-stats">👥 12 thành viên tham gia</div>
+            <a href="hoat-dong-orc.html">Xem chi tiết <i class="fas fa-arrow-right" style="font-size: 11px;"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activities list (right) -->
+      <div class="activities-list">
+        <div class="activity-item">
+          <h4>Chế tạo Robot</h4>
+          <p>Xây dựng và lập trình robot tự động</p>
+          <a href="hoat-dong-robot.html">Xem thêm</a>
+        </div>
+        <div class="activity-item">
+          <h4>Lập trình Python</h4>
+          <p>Học lập trình Python từ cơ bản đến nâng cao</p>
+          <a href="hoat-dong-python.html">Xem thêm</a>
+        </div>
+        <div class="activity-item">
+          <h4>Workshop STEM</h4>
+          <p>Các buổi workshop khoa học thực hành</p>
+          <a href="hoat-dong-stem.html">Xem thêm</a>
+        </div>
+        <div class="activity-item">
+          <h4>Tham quan trường bằng APP 360 - RMA THPT Thống Linh</h4>
+          <p>-----</p>
+          <a href="tham-quan-truong-hoc-ao.html">Xem thêm</a>
+        </div>
+        <div class="activity-item">
+          <h4>Dự án Khoa học</h4>
+          <p>Nghiên cứu và phát triển dự án khoa học</p>
+          <a href="hoat-dong-khoa-hoc.html">Xem thêm</a>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="danh-sach-hoat-dong.html" style="color: #001c80; text-decoration: none; font-weight: 700; padding: 8px 16px; border: 2px solid #001c80; border-radius: 6px; display: inline-block; transition: .3s;">Xem tất cả hoạt động</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tall vertical image carousel: shows 5 at a time, auto-scrolls every 3s -->
+  <section class="tall-carousel-section container scroll-reveal" style="padding-top:0px;">
+    
+    <div class="tall-carousel">
+      <div class="tall-track">
+        <div class="tall-item"><img src="img/ORC2.jpg" alt="ảnh 1"></div>
+        <div class="tall-item"><img src="img/ORC3.jpg" alt="ảnh 2"></div>
+        <div class="tall-item"><img src="img/ORC4.jpg" alt="ảnh 3"></div>
+        <div class="tall-item"><img src="img/ORC5.jpg" alt="ảnh 4"></div>
+        <div class="tall-item"><img src="img/ORC6.jpg" alt="ảnh ORC"></div>
+        
+        <div class="tall-item"><img src="img/ORC9.JPG" alt="ảnh ORC"></div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Dự án tiêu biểu -->
+  <section id="projects" class="container scroll-reveal" style="padding-top: 0px;">
+    <h2 class="section-title">CLB làm những gì?</h2>
+    <div class="projects">
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Robot tự động">
+        <div class="info">
+          <h3>Robot tự động</h3>
+          <p>Dự án nghiên cứu chế tạo robot tự vận hành và giải quyết bài toán thực tế.</p>
+        </div>
+        <a href="#">Xem chi tiết</a>
+      </div>
+      <div class="project-card">
+        <img src="img/toan-hoc.jpg" alt="Ứng dụng toán học">
+        <div class="info">
+          <h3>Ứng dụng toán học</h3>
+          <p>Ứng dụng toán học trong phân tích dữ liệu và lập trình mô phỏng.</p>
+        </div>
+        <a href="#">Xem chi tiết</a>
+      </div>
+      <div class="project-card">
+        <img src="img/stem.jpg" alt="STEM Workshop">
+        <div class="info">
+          <h3>STEM</h3>
+          <p>Các buổi workshop STEM dành cho học sinh trong trường nhằm lan tỏa tinh thần sáng tạo.</p>
+        </div>
+        <a href="#">Xem chi tiết</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dự án cũ -->
+  <section class="container scroll-reveal" style="padding: 20px;">
+    <h2 class="section-title">Dự án phần mềm</h2>
+    <div class="projects">
+      <div class="project-card">
+        <img src="img/banner-chemical-equation-balacer.png" alt="Dự án cân bằng phương trình hóa học">
+        <a href="https://tlclass.github.io/canbanghoahoc/">Xem Dự Án</a>
+      </div>
+      <div class="project-card">
+        <img src="img/banner-periodic-table.png" alt="Dự án bảng tuần hoàn hóa học">
+        <a href="https://tlclass.github.io/canbanghoahoc/">Xem Dự Án</a>
+      </div>
+      <div class="project-card">
+        <img src="img/Thống kê số liệu.png" alt="Dự án thống kê số liệu">
+        <a href="thong-ke-so-lieu.html">Xem Dự Án</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="container scroll-reveal" style="background-color: #fff; max-width: 1200px; padding: 20px; border-radius: 12px; box-shadow: 0 3px 12px rgba(0, 0, 0, .1); margin-top: 40px; margin-bottom: 40px;">
+    <h3 style="color: #001c80;">Lời nói đầu</h3>
+    <p>Chào mừng các bạn đến với <strong> Câu lạc bộ Robot & Toán học Ứng dụng (RMA CLUB) </strong> của trường THPT Thống Linh!</p>
+    <p>Đây là nơi tụi mình cùng nhau khám phá thế giới khoa học, lập trình, robot và toán học theo cách thật thú vị và sáng tạo. Tham gia CLB, các bạn sẽ được thử sức với nhiều hoạt động: từ chế tạo robot, viết code, giải các bài toán ứng dụng, cho đến những buổi workshop STEM đầy năng lượng.</p>
+    <p>Không chỉ học hỏi kiến thức mới, thành viên RMA còn được rèn luyện tư duy logic, kỹ năng làm việc nhóm và quan trọng nhất là có thêm những người bạn chung niềm đam mê.</p>
+    <p>Hãy cùng nhau biến ý tưởng thành hiện thực và trải nghiệm cảm giác “vừa học, vừa chơi, vừa sáng tạo” tại RMA CLUB nhé!</p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+        <img src="img/robot1.jpg" style="height: 200px; margin: 10px; border-radius: 12px;" alt="" srcset="">
+        <img src="img/robot4.jpg" style="height: 200px; margin: 10px; border-radius: 12px;" alt="" srcset="">
+        <img src="img/robot5.jpg" style="height: 200px; margin: 10px; border-radius: 12px;" alt="" srcset="">
+    </div>
+    <h3>Định hướng của CLB</h3>
+    <p> <strong> Khám phá: </strong> Tạo môi trường để học sinh trải nghiệm khoa học, robot và toán học một cách sinh động.
+        <br>
+        <strong> Rèn luyện: </strong> Phát triển tư duy logic, kỹ năng giải quyết vấn đề và tinh thần làm việc nhóm.
+        <br>
+        <strong> Ứng dụng: </strong> Đưa kiến thức đã học vào đời sống thực tế thông qua các dự án sáng tạo.
+        <br>
+        <strong>Lan tỏa: </strong> Góp phần xây dựng phong trào học tập khoa học – công nghệ trong toàn trường.
+    </p>
+
+    <p>Nếu bạn yêu thích robot, công nghệ, toán học ứng dụng, hay đơn giản chỉ muốn thử sức với một điều gì đó mới mẻ – hãy đến với RMA CLUB.</p>
+    <p>Tại đây, bạn sẽ tìm thấy những người bạn cùng đam mê, cùng đồng hành và cùng biến những ý tưởng táo bạo thành hiện thực.</p>
+    <h4>RMA CLUB – Khám phá, sáng tạo và vươn xa cùng nhau!</h2>
+
+  </section>
+
+
+  <section class="container scroll-reveal" style="background-color: #fff; max-width: 1200px; padding: 20px; border-radius: 12px; box-shadow: 0 3px 12px rgba(0, 0, 0, .1); margin-top: 40px; margin-bottom: 40px;">
+    <h3 style="color: #001c80;">Tư vấn & Giải đáp</h3>
+    <p style="margin: 7px;">Các bạn có thể liên hệ bằng cách qua email hoặc qua SĐT (Zalo):</p>
+    <p style="margin: 7px; margin-left: 10px;">Email: rmathonglinh@gmail.com</p>
+    <p style="margin: 7px; margin-left: 10px;">Thầy Lê Quang Nhân - THPT Thống Linh</p>
+    <p style="margin: 7px; margin-left: 10px;">Chủ nhiệm CLB: Trần Tuấn Kiệt - 0976769044 (Zalo)</p>
+    <p style="margin: 7px;">Luôn sẵn sàng hỗ trợ các bạn từ các khối 10 - 11 - 12, luôn chào đón thành viên mới nè !</p>
+  </section>
+</main>
+
+  <footer>
+    <div class="footer-container">
+      <h3>RMA CLUB - THPT Thống Linh</h3>
+      <p>
+        Câu lạc bộ Robot & Toán học Ứng dụng - nơi học sinh nuôi dưỡng đam mê khoa học, 
+        lập trình và sáng tạo.
+      </p>
+      <!--
+      <nav aria-label="Liên kết nhanh">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="thongtin.html">Thông tin</a></li>
+          <li><a href="duan.html">Dự án</a></li>
+          <li><a href="#thamgia">Tham gia</a></li>
+        </ul>
+      </nav>
+    -->
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+      <small> Được tạo bởi RMA CLUB - THPT Thống Linh. </small>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal animation: fade-in + slide-up when section enters viewport
+    document.addEventListener('DOMContentLoaded', function(){
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      // Apply to all sections and main containers
+      document.querySelectorAll('.scroll-reveal').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+  <script>
+    // Tall vertical carousel: show 5 at a time, auto-scroll every 3s, seamless loop
+    document.addEventListener('DOMContentLoaded', function(){
+      const carousel = document.querySelector('.tall-carousel');
+      if (!carousel) return;
+      const track = carousel.querySelector('.tall-track');
+      if (!track) return;
+
+      let items = Array.from(track.querySelectorAll('.tall-item'));
+      const visible = window.innerWidth <= 520
+        ? 2
+        : window.innerWidth <= 800
+          ? 3
+          : window.innerWidth <= 1100
+            ? 4
+            : 5;
+      const originalCount = items.length;
+      if (originalCount <= visible) return; // nothing to scroll
+
+      // compute item margin-right from styles
+      const sample = items[0];
+      const itemMarginRight = parseFloat(getComputedStyle(sample).marginRight) || 12;
+
+      // clone first visible items for seamless looping
+      for (let i = 0; i < visible; i++) track.appendChild(items[i].cloneNode(true));
+      // refresh items list
+      items = Array.from(track.querySelectorAll('.tall-item'));
+
+      // Apply transform based on 0-indexed position (not nth-child CSS)
+      // so that 0, 2, 4... (odd in display: 1st, 3rd, 5th) are lifted, rest are level
+      function applyStagger(){
+        items.forEach((item, idx) => {
+          if (idx % 2 === 0) {
+            item.style.transform = 'translateY(-24px)';
+          } else {
+            item.style.transform = 'translateY(0)';
+          }
+        });
+      }
+      applyStagger();
+
+      let index = 0;
+      const duration = 3000; // ms
+      let offsets = [];
+
+      function computeOffsets(){
+        offsets = [];
+
+        let cumulative = 0;
+
+        for (let i = 0; i < items.length; i++) {
+          offsets[i] = cumulative;
+
+          const itemWidth = items[i].offsetWidth;
+
+          cumulative += itemWidth + itemMarginRight;
+        }
+      }
+
+      function move(){
+        if (!offsets.length) computeOffsets();
+        const shift = offsets[index] || 0;
+        track.style.transform = `translateX(-${shift}px)`;
+      }
+
+      function next(){
+        index++;
+        track.style.transition = 'transform .6s cubic-bezier(.22,.9,.35,1)';
+        move();
+        if (index > originalCount) {
+          // after transition, jump back to start without animation
+          const onEnd = () => {
+            track.style.transition = 'none';
+            index = 0;
+            track.style.transform = `translateX(0px)`;
+            // force reflow and restore transition
+            void track.offsetWidth;
+            setTimeout(()=> track.style.transition = 'transform .6s cubic-bezier(.22,.9,.35,1)', 20);
+            track.removeEventListener('transitionend', onEnd);
+          };
+          track.addEventListener('transitionend', onEnd);
+        }
+      }
+
+      // initialize offsets and start
+      computeOffsets();
+      move();
+      let timer = setInterval(next, duration);
+      carousel.addEventListener('mouseenter', ()=> clearInterval(timer));
+      carousel.addEventListener('mouseleave', ()=> { clearInterval(timer); timer = setInterval(next, duration); });
+      window.addEventListener('resize', ()=> { track.style.transition = 'none'; computeOffsets(); applyStagger(); move(); setTimeout(()=> track.style.transition = 'transform .6s cubic-bezier(.22,.9,.35,1)', 20); });
+    });
+  </script>
+
+  <script>
+    // Simple, robust banner slider
+    document.addEventListener('DOMContentLoaded', function(){
+      const slidesContainer = document.querySelector('.banner-slides');
+      const slides = slidesContainer ? Array.from(slidesContainer.children) : [];
+      const dotsWrap = document.querySelector('.banner-dots');
+      if (!slidesContainer || !slides.length || !dotsWrap) return;
+
+      let idx = 0; const interval = 3000; let timer = null;
+
+      // set image load fallback: if <img> fails, hide it
+      slides.forEach(s => {
+        const img = s.querySelector('img');
+        if (img) img.addEventListener('error', ()=> { img.style.display='none'; s.style.background='#e9eef6'; });
+      });
+
+      // create dots
+      slides.forEach((_, i) => {
+        const b = document.createElement('button'); b.className='dot'; b.setAttribute('aria-label','Slide '+(i+1));
+        b.addEventListener('click', ()=> { goTo(i); resetTimer(); });
+        dotsWrap.appendChild(b);
+      });
+
+      const dots = Array.from(dotsWrap.children);
+
+      function update(){
+        slidesContainer.style.transform = `translateX(-${idx*100}%)`;
+        dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
+      }
+
+      function next(){ idx = (idx+1) % slides.length; update(); }
+      function goTo(i){ idx = (i+slides.length)%slides.length; update(); }
+      function resetTimer(){ clearInterval(timer); timer = setInterval(next, interval); }
+
+      update(); timer = setInterval(next, interval);
+      const stage = document.querySelector('.banner-stage');
+      stage.addEventListener('mouseenter', ()=> clearInterval(timer));
+      stage.addEventListener('mouseleave', ()=> resetTimer());
+      window.addEventListener('resize', update);
+    });
+  </script>
+
+<script>
+document.querySelector('#submit_form').onsubmit = function(e) {
+  e.preventDefault();
+  let msgOj = document.querySelector('.msg');
+  let fullNameOj = document.querySelector('input[name="hoTen"]');
+  let classOj = document.querySelector('input[name="lopHoc"]');
+  let emailOj = document.querySelector('input[name="email"]');
+  let phoneOj = document.querySelector('input[name="soDienThoai"]');
+
+  let fullName = fullNameOj.value;
+  let classname = classOj.value;
+  let email = emailOj.value;
+  let phone = phoneOj.value;
+
+  let data = {
+    'entry.1476234119': fullName,
+    'entry.264518076': classname,
+    'entry.1520167146': email,
+    'entry.1529149578': phone
+  };
+
+  if (fullName.trim() && classname.trim() && email.trim() && phone.trim()) {
+    let queryString = new URLSearchParams(data).toString();
+    msgOj.innerHTML = '<div style="color:green;">Đang xử lý...</div>';
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScG5jeN9WJ6EH7893AkTj7H_rzH1_zYUI4L0JQFqQvB65DTxQ/formResponse', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(queryString);
+
+    msgOj.innerHTML = '<div class="alert alert-success">Gửi dữ liệu thành công!</div>';
+    fullNameOj.value = '';
+    classOj.value = '';
+    emailOj.value = '';
+    phoneOj.value = '';
+  } else {
+    msgOj.innerHTML = '<div class="alert alert-danger">Vui lòng nhập đầy đủ thông tin!</div>';
+  }
+};
+</script>
+
+<!-- Search Results Container -->
+<div class="search-results" id="searchResults"></div>
+
+<!-- Floating Chat Bubble -->
+<div class="chat-bubble" id="chatBubble" aria-label="Liên hệ qua messenger">
+  💬
+</div>
+
+<script>
+  // Chat Bubble Handler
+  document.getElementById('chatBubble').addEventListener('click', function() {
+    // Mở Facebook fanpage messenger
+    window.open('https://www.facebook.com/profile.php?id=61581827856845&locale=vi_VN', '_blank');
+  });
+</script>
+
+  <script src="rma-header.js"></script>
+</body>
+
+</html>

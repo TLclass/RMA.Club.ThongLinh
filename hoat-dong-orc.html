@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuộc thi ORC - RMA CLUB</title>
+  <meta name="description" content="Cuộc thi Open Robotics Challenge (ORC) - Sự kiện nổi bật của RMA CLUB">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  <link rel="icon" href="img/logo-rma-png.png" type="image/png">
+  <style>
+    /* Reset & Cơ bản */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #333; background: #f4f6fb; }
+    img { max-width: 100%; display: block; }
+
+    /* Container */
+    .container { width: 90%; max-width: 1200px; margin: auto; }
+
+    /* Header */
+    header { background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.1); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+    header h1 { color: #001c80; font-size: 26px; font-weight: 700; letter-spacing: 1px; }
+    nav ul { list-style: none; display: flex; gap: 25px; }
+    nav a { text-decoration: none; color: #333; font-weight: 500; transition: .3s; }
+    nav a:hover { color: #001c80; }
+    .menu-toggle { display: none; cursor: pointer; font-size: 24px; }
+
+    /* Hero Section */
+    .article-hero {
+      position: relative; height: 400px; background-size: cover; background-position: center;
+      border-radius: 12px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 6px 20px rgba(0,0,0,.15);
+    }
+    .article-hero::after {
+      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,.35);
+    }
+    .article-hero-content {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 30px; color: #fff; z-index: 2;
+    }
+    .article-hero h1 { font-size: 36px; margin-bottom: 15px; font-weight: 700; }
+    .article-meta {
+      display: flex; gap: 20px; font-size: 14px; opacity: 0.95;
+    }
+    .article-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* Main Content */
+    .article-wrapper { display: grid; grid-template-columns: 1fr 320px; gap: 30px; margin-bottom: 50px; }
+    .article-main { background: #fff; padding: 40px; border-radius: 12px; border: 1px solid #d2d2d2; }
+    .article-content { line-height: 1.8; font-size: 16px; color: #444; }
+    .article-content h2 { color: #001c80; font-size: 24px; margin: 30px 0 15px; }
+    .article-content h3 { color: #0050b8; font-size: 18px; margin: 25px 0 12px; }
+    .article-content p { margin-bottom: 16px; }
+    .article-content ul { margin-left: 20px; margin-bottom: 16px; }
+    .article-content li { margin-bottom: 8px; }
+    .article-content img {
+      display: block;
+      width: min(100%, 680px);
+      height: auto;
+      margin: 25px auto;
+      border-radius: 8px;
+    }
+    .article-image-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin: 25px auto;
+    }
+    .article-image-row img {
+      width: calc((100% - 40px) / 3);
+      max-width: 100%;
+      margin: 0;
+      border-radius: 8px;
+    }
+
+    /* Sidebar */
+    .article-sidebar { }
+    .sidebar-widget {
+      background: #fff; padding: 25px; border-radius: 12px; margin-bottom: 25px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    }
+    .sidebar-widget h3 { color: #001c80; font-size: 16px; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid #e3f2fd; padding-bottom: 10px; }
+    .widget-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      display: inline-block; background: linear-gradient(135deg, #e3f2fd, #f5f7fa);
+      color: #001c80; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all .3s;
+    }
+    .tag:hover { background: linear-gradient(135deg, #001c80, #0034c2); color: #fff; }
+    .widget-meta { font-size: 14px; color: #666; }
+    .widget-meta p { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .widget-meta i { color: #001c80; width: 18px; }
+
+    /* Related Activities */
+    .related-activities { margin-top: 60px; padding-top: 40px; border-top: 2px solid #e0e0e0; }
+    .related-activities h2 { color: #001c80; font-size: 28px; margin-bottom: 30px; text-align: center; }
+    .related-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+    }
+    .activity-card {
+      background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,.08);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .activity-card:hover { transform: translateY(-6px); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+    .activity-card img { width: 100%; height: 180px; object-fit: cover; }
+    .activity-card-content { padding: 18px; }
+    .activity-card-tag { display: inline-block; background: #e3f2fd; color: #001c80; padding: 4px 10px;
+      border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+    .activity-card h3 { color: #001c80; font-size: 16px; margin-bottom: 8px; font-weight: 700; }
+    .activity-card p { font-size: 13px; color: #666; margin-bottom: 12px; line-height: 1.5; }
+    .activity-card-link { color: #001c80; text-decoration: none; font-weight: 600; font-size: 13px; }
+    .activity-card-link:hover { color: #0034c2; }
+
+    /* Footer */
+    footer { background: #252935; color: #fff; padding: 50px 20px; text-align: center; margin-top: 60px; }
+    footer .footer-container { max-width: 1200px; margin: auto; }
+    footer h3 { margin-bottom: 15px; font-size: 20px; font-weight: 700; }
+    footer p { font-size: 15px; }
+    footer .social { margin: 20px 0; }
+    footer .social a { color: #fff; margin: 0 10px; font-size: 22px; transition: .3s; }
+    footer .social a:hover { color: #ffd700; }
+    footer small { display: block; margin-top: 20px; font-size: 14px; opacity: .8; }
+
+    /* Back Link */
+    .breadcrumb { margin-bottom: 30px; }
+    .breadcrumb a { color: #001c80; text-decoration: none; font-weight: 600; }
+    .breadcrumb a:hover { color: #0034c2; }
+
+    /* Responsive */
+    @media(max-width: 900px) {
+      .article-wrapper { grid-template-columns: 1fr; }
+      .article-hero h1 { font-size: 28px; }
+      .article-main { padding: 25px; }
+    }
+    @media(max-width: 768px) {
+      nav ul { flex-direction: column; position: absolute; top: 65px; right: 0; background: #fff;
+        width: 220px; padding: 20px; display: none; box-shadow: 0 2px 10px rgba(0,0,0,.1); }
+      nav ul.active { display: flex; }
+      .menu-toggle { display: block; color: #001c80; }
+      .article-hero h1 { font-size: 24px; }
+      .article-hero-content { padding: 25px 20px; }
+      .article-main { padding: 20px; }
+      .related-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Search Bar */
+    .search-container {
+      padding: 15px 0;
+      margin-bottom: 20px;
+    }
+    .search-box {
+      display: flex;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 14px 50px 14px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 50px;
+      font-size: 15px;
+      outline: none;
+      transition: all .3s ease;
+      background: #f8f9fa;
+    }
+    .search-box input:focus {
+      border-color: #001c80;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0, 28, 128, 0.1);
+    }
+    .search-box button {
+      position: absolute;
+      right: 35px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #001c80;
+      color: #fff;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-box button:hover {
+      background: #0034c2;
+      transform: translateY(-50%) scale(1.05);
+    }
+    .search-results {
+      max-width: 800px;
+      margin: 10px auto 0;
+      padding: 0 20px;
+      display: none;
+    }
+    .search-results.active {
+      display: block;
+    }
+    .search-result-item {
+      background: #fff;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      cursor: pointer;
+      transition: all .3s ease;
+      border-left: 4px solid #001c80;
+    }
+    .search-result-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0,28,128,.15);
+    }
+    .search-result-item h4 {
+      color: #001c80;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+    .search-result-item p {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Floating Chat Bubble */
+    .chat-bubble {
+      position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+      background: linear-gradient(135deg, #001c80, #0034c2); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 28, 128, 0.3); transition: all .3s ease; z-index: 999;
+      font-size: 28px;
+    }
+    .chat-bubble:hover { transform: scale(1.1); box-shadow: 0 8px 24px rgba(0, 28, 128, 0.4); }
+
+  </style>
+  <link rel="stylesheet" href="rma-header.css">
+  <link rel="stylesheet" href="rma-items.css">
+</head>
+<body>
+
+  
+  <div class="rma-topbar">Câu lạc bộ Robot &amp; Toán học Ứng dụng - THPT Thống Linh &nbsp;·&nbsp; rmathonglinh@gmail.com</div>
+<header class="rma-site-header">
+  <div class="rma-header-inner">
+    <a class="rma-logo" href="index.html">RMA CLUB <span class="rma-logo-badge">TL</span></a>
+    <button class="rma-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    <nav class="rma-nav" aria-label="Menu chính">
+      <a href="index.html">Trang chủ</a>
+      <a href="thongtin.html">Thông tin</a>
+      <a href="danh-sach-hoat-dong.html" class="active">Hoạt động</a>
+      <a href="duan.html">Dự án</a>
+      <a href="thamgia.html">Tham gia</a>
+    </nav>
+  </div>
+</header>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <form class="search-box" onsubmit="handleSearch(event)">
+      <input type="text" id="searchInput" placeholder="Tìm kiếm hoạt động, dự án, thông tin..." aria-label="Tìm kiếm">
+      <button type="submit" aria-label="Tìm kiếm">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="container breadcrumb" style="margin-top: 20px;">
+    <a href="index.html">Trang chủ</a> / <a href="danh-sach-hoat-dong.html">Hoạt động</a> / <span style="color: #666;">Cuộc thi ORC</span>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="container">
+    <div class="article-hero" style="background-image: url('img/ORC1.jpg');">
+      <div class="article-hero-content">
+        <h1>Cuộc thi Open Robotics Challenge (ORC)</h1>
+        <div class="article-meta">
+          <span><i class="far fa-calendar"></i> 23/11/2024</span>
+          <span><i class="fas fa-map-marker-alt"></i> Trường THPT Thống Linh</span>
+          <span><i class="fas fa-users"></i> 12 thành viên</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container article-wrapper">
+    <article class="article-main">
+      <div class="article-content">
+        <p><strong>Ngày 23/11/2024</strong>, tại <strong>Trường THPT Thống Linh</strong> đã diễn ra <strong>Cuộc thi Open Robotics Challenge (ORC) khu vực Đồng Tháp lần thứ nhất</strong>. Sự kiện do <strong>Trường THPT Thống Linh</strong> phối hợp cùng <strong>Viện Nghiên cứu Thiết kế Trường học</strong>, <strong>Bộ GD&ĐT</strong> và <strong>Công ty AITT</strong> tổ chức.</p>
+
+        <h2>Mục tiêu cuộc thi</h2>
+        <p>Cuộc thi quy tụ <strong>20 đội thi đến từ 10 trường THPT</strong> trong tỉnh, thi đấu đối kháng với nhiệm vụ <em>điều khiển robot di chuyển và xếp khối trong 150 giây</em>. Mục tiêu của cuộc thi là <strong>thúc đẩy tư duy sáng tạo, khoa học – công nghệ, và kỹ năng tiếp cận CMCN 4.0 cho học sinh</strong>.</p>
+
+        <div class="article-image-row">
+          <img src="img/ORC2.JPG" alt="Khoảnh khắc cuộc thi ORC">
+          <img src="img/ORC3.JPG" alt="Toàn cảnh cuộc thi">
+          <img src="img/ORC8.JPG" alt="Đội tuyển RMA tại cuộc thi">
+        </div>
+
+        <h2>Kết quả đạt được</h2>
+        <p>Đội tuyển trong CLB RMA trường THPT Thống Linh đạt <strong>Huy chương bạc - Giải Nhì</strong>. Thành tích này là minh chứng rõ nét cho sự cố gắng và nỗ lực không ngừng của đội tuyển trong quá trình chuẩn bị.</p>
+
+        <h3>Những điểm nổi bật</h3>
+        <ul>
+          <li>Thiết kế robot tự hành hiệu quả với khả năng di chuyển chính xác</li>
+          <li>Lập trình logic điều khiển tối ưu trong thời gian thi đấu</li>
+          <li>Thuyết trình dự án rõ ràng và chuyên nghiệp</li>
+          <li>Kỹ năng làm việc nhóm xuất sắc</li>
+        </ul>
+
+        <h2>Ý nghĩa và tầm quan trọng</h2>
+        <p>Thành tích tại cuộc thi Open Robotics Challenge lần thứ nhất là nguồn cảm hứng để Câu lạc bộ RMA – Trường THPT Thống Linh tiếp tục lan tỏa tinh thần học hỏi, sáng tạo và chinh phục công nghệ. Đây cũng là nền tảng vững chắc cho những thành tích cao hơn trong các kỳ thi sắp tới.</p>
+
+        <h2>Cảm ơn và kế hoạch tương lai</h2>
+        <p>Chúng tôi xin gửi lời cảm ơn tới các thầy cô giáo, ban giám hiệu nhà trường đã tạo điều kiện cho CLB phát triển, đặc biệt là Thầy Lê Quang Nhân. Trong tương lai, CLB sẽ tiếp tục hoàn thiện kỹ năng, tham gia các cuộc thi quy mô lớn hơn và góp phần nâng cao uy tín của trường.</p>
+      </div>
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="article-sidebar">
+      <!-- Tags Widget -->
+      <div class="sidebar-widget">
+        <h3>Thẻ</h3>
+        <div class="widget-tags">
+          <span class="tag">Robot</span>
+          <span class="tag">Cuộc thi</span>
+          <span class="tag">Lập trình</span>
+          <span class="tag">Sự kiện</span>
+        </div>
+      </div>
+
+      <!-- Meta Widget -->
+      <div class="sidebar-widget">
+        <h3>Thông tin</h3>
+        <div class="widget-meta">
+          <p><i class="far fa-calendar"></i> <strong>Ngày:</strong> 23/11/2024</p>
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Địa điểm:</strong> THPT Thống Linh</p>
+          <p><i class="fas fa-award"></i> <strong>Kết quả:</strong> Giải Nhì</p>
+          <p><i class="fas fa-users"></i> <strong>Đội:</strong> 12 thành viên</p>
+          <p><i class="fas fa-link"></i> <strong>Phân loại:</strong> Sự kiện CLB</p>
+        </div>
+      </div>
+
+      <!-- Contact Widget -->
+      <div class="sidebar-widget" style="background: linear-gradient(135deg, #e3f2fd, #f5f7fa); border-left: 4px solid #001c80;">
+        <h3>Liên hệ</h3>
+        <p style="font-size: 13px; color: #444; line-height: 1.6;">
+          Muốn tìm hiểu thêm về CLB hoặc tham gia? Hãy liên hệ với chúng tôi!
+        </p>
+        <p style="margin-top: 12px; font-size: 13px;">
+          <strong>Email:</strong> rmathonglinh@gmail.com<br>
+          <strong>Zalo:</strong> 0763.757.343
+        </p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Activities -->
+  <div class="container">
+    <section class="related-activities">
+      <h2>Hoạt động liên quan</h2>
+      <div class="related-grid">
+        <div class="activity-card">
+          <img src="img/ORC1.jpg" alt="Chế tạo Robot">
+          <div class="activity-card-content">
+            <span class="activity-card-tag">Robot</span>
+            <h3>Chế tạo Robot</h3>
+            <p>Xây dựng và lập trình robot tự động cho các cuộc thi và dự án thực tế.</p>
+            <a href="hoat-dong-robot.html" class="activity-card-link">Xem chi tiết →</a>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <img src="img/ORC2.JPG" alt="Lập trình Python">
+          <div class="activity-card-content">
+            <span class="activity-card-tag">Lập trình</span>
+            <h3>Lập trình Python</h3>
+            <p>Học lập trình Python từ cơ bản đến nâng cao cho ứng dụng thực tế.</p>
+            <a href="hoat-dong-python.html" class="activity-card-link">Xem chi tiết →</a>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <img src="img/ORC3.JPG" alt="Workshop STEM">
+          <div class="activity-card-content">
+            <span class="activity-card-tag">STEM</span>
+            <h3>Workshop STEM</h3>
+            <p>Các buổi workshop khoa học thực hành kích thích tư duy sáng tạo.</p>
+            <a href="hoat-dong-stem.html" class="activity-card-link">Xem chi tiết →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <h3>RMA CLUB - THPT Thống Linh</h3>
+      <p>Câu lạc bộ Robot & Toán học Ứng dụng - nơi học sinh nuôi dưỡng đam mê khoa học, lập trình và sáng tạo.</p>
+      <div class="social">
+        <a href="https://www.facebook.com/profile.php?id=61581827856845&locale=vi_VN" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+      <small>Được tạo bởi RMA CLUB - THPT Thống Linh.</small>
+    </div>
+  </footer>
+
+  <!-- Search Results Container -->
+  <div class="search-results" id="searchResults"></div>
+
+  <!-- Floating Chat Bubble -->
+  <div class="chat-bubble" id="chatBubble" aria-label="Liên hệ qua messenger">
+    💬
+  </div>
+
+  <script>
+
+
+    // Chat Bubble Handler
+    document.getElementById('chatBubble').addEventListener('click', function() {
+      window.open('https://www.facebook.com/profile.php?id=61581827856845&locale=vi_VN', '_blank');
+    });</script>
+
+  <script src="rma-header.js"></script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+/* Final visual polish for the home page: a focused, professional navy palette. */
+.home-main {
+  --home-blue: #0b1f52;
+  --home-blue-2: #2563eb;
+  --home-ink: #12213f;
+  --home-muted: #64748b;
+  --home-line: #dbe4f0;
+  background: linear-gradient(180deg, #f4f7fc 0%, #ffffff 28%, #f7f9fc 100%) !important;
+}
+
+.home-hero {
+  background: linear-gradient(108deg, rgba(5, 19, 56, .96) 0%, rgba(10, 42, 112, .91) 52%, rgba(20, 83, 194, .76) 100%), url('img/banner-hero.jpg') center/cover !important;
+}
+.home-hero .hero-kicker { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.28); }
+.home-hero h2 em { color: #9fcdff; font-style: normal; }
+.home-hero .btn { background: #ffffff !important; color: #103278 !important; }
+.home-hero .btn:hover { background: #dbeafe !important; }
+
+/* The original two section ribbons become restrained navigation markers. */
+.home-main > .container[style*="height: 50px"] {
+  background: #ffffff !important;
+  border-color: #d7e1f0 !important;
+  box-shadow: 0 10px 25px rgba(15, 35, 75, .06) !important;
+}
+.home-main > .container[style*="height: 50px"] i,
+.home-main > .container[style*="height: 50px"] p { color: #1d4ed8 !important; }
+.home-main > .container[style*="height: 50px"] p { letter-spacing: .01em; }
+
+.home-main .flex .card:first-child {
+  background: linear-gradient(145deg, #0b1f52 0%, #173f9b 100%) !important;
+  box-shadow: 0 16px 32px rgba(11,31,82,.18) !important;
+}
+.home-main .flex .card:not(:first-child),
+.home-main .scroll-reveal[style*="background-color: #fff"] {
+  background: rgba(255,255,255,.96) !important;
+}
+.home-main .section-title { color: #10224a !important; }
+.home-main .section-title::after { background: linear-gradient(90deg, #2563eb, #60a5fa) !important; }
+
+.home-main .team-card,
+.home-main .project-card,
+.home-main .activity-item,
+.home-main .featured-activity {
+  border-color: #dce5f1 !important;
+}
+.home-main .team-card:hover,
+.home-main .project-card:hover,
+.home-main .activity-item:hover {
+  border-color: #9bbaf5 !important;
+  box-shadow: 0 18px 34px rgba(30, 64, 175, .13) !important;
+}
+.home-main .team-card .icon { background: #edf3ff !important; color: #2563eb !important; }
+.home-main .team-card:nth-child(2) .icon { background: #eefbf8 !important; color: #0f9b78 !important; }
+.home-main .team-card:nth-child(3) .icon { background: #fff7e8 !important; color: #cc8200 !important; }
+.home-main .team-card:nth-child(4) .icon { background: #fff0f4 !important; color: #d44870 !important; }
+
+.home-main .featured-activity-badge { background: #2563eb !important; }
+.home-main .meta-type { background: #eaf1ff !important; color: #1d4ed8 !important; }
+.home-main .featured-activity-footer a,
+.home-main .activity-item a { color: #1d4ed8 !important; }
+.home-main .project-card a { background: linear-gradient(135deg, #173f9b, #2563eb) !important; }
+.home-main .project-card a:hover { background: #0b1f52 !important; }
+.home-main .banner-stage { box-shadow: 0 22px 46px rgba(10, 42, 112, .20) !important; }
+
+footer { background: #091b42 !important; }
+footer .social a:hover, footer nav a:hover { color: #9fcdff !important; }
+
+/* =========================================================
+   FIX TRÀN NGANG TRÊN ĐIỆN THOẠI
+   ========================================================= */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+/* Header */
+.rma-site-header .rma-header-inner {
+  min-width: 0;
+}
+
+.rma-site-header .rma-logo {
+  min-width: 0;
+  max-width: calc(100% - 55px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Hero */
+.home-hero {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.home-hero .hero-content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Stats */
+.home-stats {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.home-stat {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+/* Container */
+.home-main .container {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Card */
+.home-main .flex {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.home-main .flex .card {
+  min-width: 0 !important;
+  max-width: 100%;
+}
+
+/* Hoạt động */
+.home-main .activities-wrap {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.home-main .featured-activity,
+.home-main .activities-list {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0 !important;
+}
+
+.home-main .featured-activity-content {
+  min-width: 0;
+}
+
+.home-main .featured-activity-meta {
+  flex-wrap: wrap;
+}
+
+.home-main .featured-activity-footer {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.home-main .activity-item {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+/* Team */
+.home-main .team-grid {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.home-main .team-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Project */
+.home-main .projects {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.home-main .project-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Banner */
+.home-main .banner-wrap,
+.home-main .banner-stage {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Carousel ảnh dọc */
+.home-main .tall-carousel,
+.home-main .tall-track {
+  max-width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   ĐIỆN THOẠI
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  /* Topbar */
+  .rma-topbar {
+    padding: 7px 10px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  /* Header */
+  .rma-site-header .rma-header-inner {
+    padding: 11px 12px;
+  }
+
+  .rma-site-header .rma-logo {
+    font-size: 17px;
+  }
+
+  /* Hero */
+  .home-hero .hero-content {
+    width: 100%;
+    padding: 42px 16px !important;
+  }
+
+  .home-hero h2 {
+    font-size: clamp(34px, 10vw, 46px) !important;
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .home-hero p {
+    font-size: 16px !important;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  /* Stats xếp dọc */
+  .home-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .home-stat {
+    padding-left: 12px;
+  }
+
+  /* Container */
+  .home-main .container {
+    width: calc(100% - 24px) !important;
+  }
+
+  /* Mục tiêu */
+  .home-main .flex {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Hoạt động */
+  .home-main .activities-wrap {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .home-main .featured-activity,
+  .home-main .activities-list {
+    width: 100%;
+    min-width: 0 !important;
+  }
+
+  .home-main .featured-activity-content {
+    padding: 18px !important;
+  }
+
+  .home-main .featured-activity h3 {
+    font-size: 21px !important;
+  }
+
+  /* Team */
+  .home-main .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Project */
+  .home-main .projects {
+    grid-template-columns: 1fr;
+  }
+
+  /* Banner */
+  .home-main .banner-stage {
+    border-radius: 14px !important;
+  }
+
+  /* Carousel */
+  .home-main .tall-carousel-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}

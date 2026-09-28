@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách hoạt động - RMA CLUB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  <link rel="icon" href="img/logo-rma-png.png" type="image/png">
+  <style>
+    /* Reset & Cơ bản */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #333; background: #f4f6fb; }
+    img { max-width: 100%; display: block; }
+
+    /* Container */
+    .container { width: 90%; max-width: 1200px; margin: auto; }
+
+    /* Header */
+    header { background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.1); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+    header h1 { color: #001c80; font-size: 26px; font-weight: 700; letter-spacing: 1px; }
+    nav ul { list-style: none; display: flex; gap: 25px; }
+    nav a { text-decoration: none; color: #333; font-weight: 500; transition: .3s; }
+    nav a:hover { color: #001c80; }
+    .menu-toggle { display: none; cursor: pointer; font-size: 24px; }
+
+    /* Search Bar */
+    .search-container {
+      padding: 15px 0;
+      margin-bottom: 20px;
+    }
+    .search-box {
+      display: flex;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 14px 50px 14px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 50px;
+      font-size: 15px;
+      outline: none;
+      transition: all .3s ease;
+      background: #f8f9fa;
+    }
+    .search-box input:focus {
+      border-color: #001c80;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0, 28, 128, 0.1);
+    }
+    .search-box button {
+      position: absolute;
+      right: 35px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #001c80;
+      color: #fff;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-box button:hover {
+      background: #0034c2;
+      transform: translateY(-50%) scale(1.05);
+    }
+    .search-results {
+      max-width: 800px;
+      margin: 10px auto 0;
+      padding: 0 20px;
+      display: none;
+    }
+    .search-results.active {
+      display: block;
+    }
+    .search-result-item {
+      background: #fff;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      cursor: pointer;
+      transition: all .3s ease;
+      border-left: 4px solid #001c80;
+    }
+    .search-result-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0,28,128,.15);
+    }
+    .search-result-item h4 {
+      color: #001c80;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+    .search-result-item p {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb { margin-bottom: 30px; }
+    .breadcrumb a { color: #001c80; text-decoration: none; font-weight: 600; }
+    .breadcrumb a:hover { color: #0034c2; }
+
+    /* Page Title */
+    .page-title {
+      text-align: center;
+      font-size: 32px;
+      color: #001c80;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .page-title::after {
+      content: "";
+      width: 60px;
+      height: 3px;
+      background: #001c80;
+      display: block;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* Activities Grid - YouTube style */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    .activity-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+      transition: all .3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .activity-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    }
+    .activity-card-image {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #e3f2fd, #f5f7fa);
+    }
+    .activity-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .activity-card:hover .activity-card-image img {
+      transform: scale(1.05);
+    }
+    .activity-card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(135deg, #001c80, #0034c2);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+    .activity-card-content {
+      padding: 18px;
+    }
+    .activity-card-icon {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e3f2fd, #f5f7fa);
+      color: #001c80;
+      text-align: center;
+      line-height: 40px;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .activity-card h3 {
+      color: #001c80;
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .activity-card p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .activity-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 12px;
+      color: #888;
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+    }
+    .activity-card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .activity-card-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #001c80;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      transition: color .2s ease;
+    }
+    .activity-card-link:hover {
+      color: #0034c2;
+    }
+
+    /* Footer */
+    footer { background: #252935; color: #fff; padding: 50px 20px; text-align: center; margin-top: 60px; }
+    footer .footer-container { max-width: 1200px; margin: auto; }
+    footer h3 { margin-bottom: 15px; font-size: 20px; font-weight: 700; }
+    footer p { font-size: 15px; }
+    footer .social { margin: 20px 0; }
+    footer .social a { color: #fff; margin: 0 10px; font-size: 22px; transition: .3s; }
+    footer .social a:hover { color: #ffd700; }
+    footer small { display: block; margin-top: 20px; font-size: 14px; opacity: .8; }
+
+    /* Responsive */
+    @media(max-width: 900px) {
+      .activities-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+    @media(max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 65px;
+        right: 0;
+        background: #fff;
+        width: 220px;
+        padding: 20px;
+        display: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,.1);
+      }
+      nav ul.active { display: flex; }
+      .menu-toggle { display: block; color: #001c80; }
+      .activities-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Floating Chat Bubble */
+    .chat-bubble {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #001c80, #0034c2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 28, 128, 0.3);
+      transition: all .3s ease;
+      z-index: 999;
+      font-size: 28px;
+    }
+    .chat-bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 24px rgba(0, 28, 128, 0.4);
+    }
+    @media(max-width: 640px) {
+      .chat-bubble {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="rma-header.css">
+  <link rel="stylesheet" href="rma-items.css">
+</head>
+<body>
+
+
+  <div class="rma-topbar">Câu lạc bộ Robot &amp; Toán học Ứng dụng - THPT Thống Linh &nbsp;·&nbsp; rmathonglinh@gmail.com</div>
+<header class="rma-site-header">
+  <div class="rma-header-inner">
+    <a class="rma-logo" href="index.html">RMA CLUB <span class="rma-logo-badge">TL</span></a>
+    <button class="rma-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    <nav class="rma-nav" aria-label="Menu chính">
+      <a href="index.html">Trang chủ</a>
+      <a href="thongtin.html">Thông tin</a>
+      <a href="danh-sach-hoat-dong.html" class="active">Hoạt động</a>
+      <a href="duan.html">Dự án</a>
+      <a href="thamgia.html">Tham gia</a>
+    </nav>
+  </div>
+</header>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <form class="search-box" onsubmit="handleSearch(event)">
+      <input type="text" id="searchInput" placeholder="Tìm kiếm hoạt động, dự án, thông tin..." aria-label="Tìm kiếm">
+      <button type="submit" aria-label="Tìm kiếm">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="container breadcrumb">
+    <a href="index.html">Trang chủ</a> / <span style="color: #666;">Hoạt động</span>
+  </div>
+
+  <!-- Page Title -->
+  <div class="container">
+    <h1 class="page-title">Danh sách các hoạt động RMA CLUB</h1>
+  </div>
+
+  <!-- Activities Grid -->
+  <div class="container">
+    <div class="activities-grid">
+      <a href="hoat-dong-robot.html" class="activity-card">
+        <div class="activity-card-image">
+          <img src="img/IMG_9404.JPG" alt="Chế tạo Robot">
+          <div class="activity-card-badge">Lập trình</div>
+        </div>
+        <div class="activity-card-content">
+          <div class="activity-card-icon">New</div>
+          <h3>Tham quan trường bằng APP 360 - RMA THPT Thống Linh</h3>
+          <p>Được phát triển bởi: Phạm Trọng Bằng - Phan Xuân Hiếu</p>
+          <div class="activity-card-meta">
+            <span><i class="far fa-clock"></i>3 ngày</span>
+            <span><i class="fas fa-users"></i>2</span>
+          </div>
+          <span class="activity-card-link">Xem chi tiết →</span>
+        </div>
+      </a>
+
+      <a href="hoat-dong-python.html" class="activity-card">
+        <div class="activity-card-image">
+          <img src="img/toan-hoc.jpg" alt="Lập trình Python">
+          <div class="activity-card-badge">💻 Lập trình</div>
+        </div>
+        <div class="activity-card-content">
+          <div class="activity-card-icon">💻</div>
+          <h3>Lập trình Python</h3>
+          <p>Học lập trình Python từ cơ bản đến nâng cao, ứng dụng thực tế</p>
+          <div class="activity-card-meta">
+            <span><i class="far fa-clock"></i> 10 buổi</span>
+            <span><i class="fas fa-users"></i> 20 thành viên</span>
+          </div>
+          <span class="activity-card-link">Xem chi tiết →</span>
+        </div>
+      </a>
+
+      <a href="hoat-dong-stem.html" class="activity-card">
+        <div class="activity-card-image">
+          <img src="img/stem.jpg" alt="Workshop STEM">
+          <div class="activity-card-badge">🔬 STEM</div>
+        </div>
+        <div class="activity-card-content">
+          <div class="activity-card-icon">🔬</div>
+          <h3>Workshop STEM</h3>
+          <p>Các buổi workshop khoa học, kỹ thuật, toán học thực hành</p>
+          <div class="activity-card-meta">
+            <span><i class="far fa-clock"></i> 6 buổi</span>
+            <span><i class="fas fa-users"></i> 25 thành viên</span>
+          </div>
+          <span class="activity-card-link">Xem chi tiết →</span>
+        </div>
+      </a>
+
+      <a href="hoat-dong-thi.html" class="activity-card">
+        <div class="activity-card-image">
+          <img src="img/robot2.jpg" alt="Cuộc thi Lập trình">
+          <div class="activity-card-badge">🎯 Cuộc thi</div>
+        </div>
+        <div class="activity-card-content">
+          <div class="activity-card-icon">🎯</div>
+          <h3>Cuộc thi Lập trình</h3>
+          <p>Thách đấu lập trình hàng tháng, giải quyết bài toán khó</p>
+          <div class="activity-card-meta">
+            <span><i class="far fa-clock"></i> Hàng tháng</span>
+            <span><i class="fas fa-users"></i> 30 thành viên</span>
+          </div>
+          <span class="activity-card-link">Xem chi tiết →</span>
+        </div>
+      </a>
+
+      <a href="hoat-dong-khoa-hoc.html" class="activity-card">
+        <div class="activity-card-image">
+          <img src="img/robot3.jpg" alt="Dự án Khoa học">
+          <div class="activity-card-badge">📊 Dự án</div>
+        </div>
+        <div class="activity-card-content">
+          <div class="activity-card-icon">📊</div>
+          <h3>Dự án Khoa học</h3>
+          <p>Phát triển ý tưởng độc lập, thực hiện dự án khoa học</p>
+          <div class="activity-card-meta">
+            <span><i class="far fa-clock"></i> Dài hạn</span>
+            <span><i class="fas fa-users"></i> 12 thành viên</span>
+          </div>
+          <span class="activity-card-link">Xem chi tiết →</span>
+        </div>
+      </a>
+
+      <a href="hoat-dong-orc.html" class="activity-card">
+        <div class="activity-card-image">
+          <img src="img/ORC1.jpg" alt="Cuộc thi ORC">
+          <div class="activity-card-badge">🏆 ORC</div>
+        </div>
+        <div class="activity-card-content">
+          <div class="activity-card-icon">🏆</div>
+          <h3>Cuộc thi ORC</h3>
+          <p>Open Robotics Challenge - Cuộc thi robotics khu vực Đồng Tháp</p>
+          <div class="activity-card-meta">
+            <span><i class="far fa-calendar"></i> 23/11/2024</span>
+            <span><i class="fas fa-users"></i> 12 thành viên</span>
+          </div>
+          <span class="activity-card-link">Xem chi tiết →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <h3>RMA CLUB - THPT Thống Linh</h3>
+      <p>Câu lạc bộ Robot & Toán học Ứng dụng - nơi học sinh nuôi dưỡng đam mê khoa học, lập trình và sáng tạo.</p>
+      <div class="social">
+        <a href="https://www.facebook.com/profile.php?id=61581827856845&locale=vi_VN" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+      <small>Được tạo bởi RMA CLUB - THPT Thống Linh.</small>
+    </div>
+  </footer>
+
+  <!-- Search Results Container -->
+  <div class="search-results" id="searchResults"></div>
+
+  <!-- Floating Chat Bubble -->
+  <div class="chat-bubble" id="chatBubble" aria-label="Liên hệ qua messenger">
+    💬
+  </div>
+
+  <script>
+
+
+    // Chat Bubble Handler
+    document.getElementById('chatBubble').addEventListener('click', function() {
+      window.open('https://www.facebook.com/profile.php?id=61581827856845&locale=vi_VN', '_blank');
+    });</script>
+
+  <script src="rma-header.js"></script>
+</body>
+</html>

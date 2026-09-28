@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câu lạc bộ Robot & Toán học Ứng dụng - RMA CLUB</title>
+  <meta name="description" content="RMA CLUB - Câu lạc bộ Robot & Toán học Ứng dụng tại THPT Thống Linh. Nơi nuôi dưỡng đam mê khoa học, robotics, lập trình và sáng tạo.">
+  <meta property="og:image" content="https://tlclass.github.io/RMA.Club.ThongLinh/img/RMA.png">
+  <meta property="og:url" content="https://tlclass.github.io/RMA.Club.ThongLinh/">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+  <link rel="icon" href="img/logo-rma-png.png"  type="image/png">
+
+  <style>
+    /* Reset & Cơ bản */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #333; background: #f4f6fb; }
+    img { max-width: 100%; display: block; }
+
+    /* Container */
+    .container { width: 90%; max-width: 1200px; margin: auto;}
+
+    /* Header */
+    header { background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.1); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+    header h1 { color: #001c80; font-size: 26px; font-weight: 700; letter-spacing: 1px; }
+    nav ul { list-style: none; display: flex; gap: 25px; }
+    nav a { text-decoration: none; color: #333; font-weight: 500; transition: .3s; }
+    nav a:hover { color: #001c80; }
+    .menu-toggle { display: none; cursor: pointer; font-size: 24px; }
+
+    /* Hero */
+    .hero {
+      background: url('img/banner-hero.jpg') center/cover no-repeat;
+      min-height: 65vh; display: flex; align-items: center; justify-content: center;
+      position: relative; color: #fff; text-align: center;
+    }
+    .hero::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.55); }
+    .hero-content { position: relative; z-index: 1; padding: 0 20px; }
+    .hero h2 { font-size: 42px; margin-bottom: 15px; }
+    .hero p { font-size: 18px; margin-bottom: 25px; }
+    .btn { display: inline-block; background: #001c80; color: #fff; padding: 12px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; transition: .3s; }
+    .btn:hover { background: #0034c2; }
+
+    /* Section */
+    section { padding: 60px 20px; }
+    .section-title {
+      text-align: center; font-size: 30px; color: #001c80; margin-bottom: 40px; position: relative;
+    }
+    .section-title::after {
+      content: ""; width: 60px; height: 3px; background: #001c80;
+      display: block; margin: 10px auto 0; border-radius: 2px;
+    }
+
+    /* Mục tiêu & Tham gia */
+    .flex { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+    .card {
+      background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 3px 12px rgba(0,0,0,.1);
+      flex: 1; min-width: 280px; transition: .3s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    form label { display: block; margin: 12px 0 6px; font-weight: 600; }
+    form input {
+      width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px;
+    }
+    form button {
+      margin-top: 15px; padding: 12px; width: 100%; background: #001c80; color: #fff;
+      font-size: 16px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; transition: .3s;
+    }
+    form button:hover { background: #0034c2; }
+
+    /* Hoạt động */
+    .gallery {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px; padding: 10px;
+    }
+    .gallery img {
+      border-radius: 14px; object-fit: cover; height: 200px; width: 100%;
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .gallery img:hover { transform: scale(1.07); box-shadow: 0 10px 25px rgba(0,0,0,0.25); }
+
+    /* Dự án */
+    .projects {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .project-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,.12); transition: transform .3s ease, box-shadow .3s ease;
+      display: flex; flex-direction: column;
+    }
+    .project-card img {
+      width: 100%; height: 200px; object-fit: cover; transition: transform .4s ease;
+    }
+    .project-card:hover img { transform: scale(1.05); }
+    .project-card .info { padding: 15px; flex-grow: 1; }
+    .project-card h3 { font-size: 20px; margin-bottom: 10px; color: #001c80; }
+    .project-card p { font-size: 15px; color: #555; }
+    .project-card a {
+      margin-top: auto; display: block; text-align: center; padding: 14px;
+      background: #001c80; color: #fff; text-decoration: none; font-weight: 600;
+      letter-spacing: .5px; transition: background .3s;
+    }
+    .project-card a:hover { background: #0034c2; }
+
+    /* Footer */
+    footer { background: #252935; color: #fff; padding: 50px 20px; text-align: center; }
+    footer .footer-container { max-width: 1200px; margin: auto; }
+    footer h3 { margin-bottom: 15px; font-size: 20px; font-weight: 700; }
+    footer p, footer a { font-size: 15px; }
+    footer nav { margin: 15px 0; }
+    footer nav ul {
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; list-style: none;
+    }
+    footer nav a { color: #fff; text-decoration: none; transition: color .3s; }
+    footer nav a:hover { color: #ffd700; }
+    footer .social { margin: 20px 0; }
+    footer .social a {
+      color: #fff; margin: 0 10px; font-size: 22px; transition: transform .3s, color .3s;
+    }
+    footer .social a:hover { transform: translateY(-4px); color: #ffd700; }
+    footer small { display: block; margin-top: 20px; font-size: 14px; opacity: .8; }
+
+    /* Responsive */
+    @media(max-width:768px) {
+      nav ul {
+        flex-direction: column; position: absolute; top: 65px; right: 0;
+        background: #fff; width: 220px; padding: 20px; display: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,.1);
+      }
+      nav ul.active { display: flex; }
+      .menu-toggle { display: block; color: #001c80; }
+      .hero h2 { font-size: 32px; }
+    }
+
+    /* Thông báo form */
+    .alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 15px;
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+    }
+
+    /* Thành công */
+    .alert-success {
+    background: #e6f9ed;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    }
+
+    /* Lỗi */
+    .alert-danger {
+    background: #fdecea;
+    color: #c62828;
+    border: 1px solid #f5c6cb;
+    }
+
+    /* Hiệu ứng mượt */
+    @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <link rel="stylesheet" href="rma-header.css">
+  <link rel="stylesheet" href="rma-items.css">
+  <link rel="stylesheet" href="thamgia-modern.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="rma-topbar">Câu lạc bộ Robot &amp; Toán học Ứng dụng - THPT Thống Linh &nbsp;·&nbsp; rmathonglinh@gmail.com</div>
+<header class="rma-site-header">
+  <div class="rma-header-inner">
+    <a class="rma-logo" href="index.html">RMA CLUB <span class="rma-logo-badge">TL</span></a>
+    <button class="rma-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    <nav class="rma-nav" aria-label="Menu chính">
+      <a href="index.html">Trang chủ</a>
+      <a href="thongtin.html">Thông tin</a>
+      <a href="danh-sach-hoat-dong.html">Hoạt động</a>
+      <a href="duan.html">Dự án</a>
+      <a href="thamgia.html" class="active">Tham gia</a>
+    </nav>
+  </div>
+</header>
+<main class="join-page">
+  <div class="join-shell">
+    <section class="join-hero" aria-labelledby="join-title">
+      <span class="join-eyebrow"><i class="fas fa-sparkles"></i> Tuyển thành viên mới</span>
+      <h1 id="join-title">Bắt đầu hành trình <span>sáng tạo</span> của bạn</h1>
+      <p>Tham gia RMA CLUB để học hỏi, làm dự án thật và kết nối cùng những bạn trẻ yêu công nghệ.</p>
+    </section>
+
+    <section class="join-layout" aria-label="Đăng ký tham gia RMA CLUB">
+      <aside class="join-value">
+        <span class="join-eyebrow"><i class="fas fa-rocket"></i> RMA CLUB</span>
+        <h2>Không chỉ học — cùng nhau tạo nên sản phẩm.</h2>
+        <p>Một môi trường thân thiện để bạn khám phá robot, lập trình, STEM và tư duy sáng tạo.</p>
+        <ul class="join-benefits">
+          <li><i class="fas fa-check"></i><span>Workshop và hoạt động thực hành thường xuyên</span></li>
+          <li><i class="fas fa-check"></i><span>Đồng đội hỗ trợ, cùng làm dự án thật</span></li>
+          <li><i class="fas fa-check"></i><span>Cơ hội tham gia cuộc thi, nghiên cứu khoa học</span></li>
+        </ul>
+        <div class="join-mini-proof">
+          <div class="join-avatars"><span>R</span><span>M</span><span>A</span></div>
+          <div><strong>Cộng đồng RMA CLUB</strong><span>Chào đón học sinh khối 10–12</span></div>
+        </div>
+      </aside>
+
+      <section class="join-form-card" aria-labelledby="form-title">
+        <span class="join-kicker"><i class="fas fa-pen-to-square"></i> Chỉ mất 1 phút</span>
+        <h2 id="form-title">Đăng ký tham gia</h2>
+        <p class="join-intro">Điền thông tin để CLB liên hệ và hướng dẫn bạn trong các bước tiếp theo.</p>
+        <form id="submit_form">
+          <div class="join-form-grid">
+            <div class="join-field full">
+              <label for="hoTen"><i class="fas fa-user"></i> Họ và tên</label>
+              <input type="text" id="hoTen" name="hoTen" placeholder="Ví dụ: Nguyễn Văn An" autocomplete="name" required>
+            </div>
+            <div class="join-field">
+              <label for="lopHoc"><i class="fas fa-graduation-cap"></i> Lớp học</label>
+              <input type="text" id="lopHoc" name="lopHoc" placeholder="Ví dụ: 10A1" required>
+            </div>
+            <div class="join-field">
+              <label for="sdt"><i class="fas fa-phone"></i> Số điện thoại (Zalo)</label>
+              <input type="tel" id="sdt" name="soDienThoai" placeholder="0xxxxxxxxx" autocomplete="tel" inputmode="numeric" pattern="[0-9]{10,11}" required>
+            </div>
+            <div class="join-field full">
+              <label for="email"><i class="fas fa-envelope"></i> Email</label>
+              <input type="email" id="email" name="email" placeholder="email@example.com" autocomplete="email" required>
+            </div>
+          </div>
+          <button class="join-submit" type="submit"><i class="fas fa-paper-plane"></i>Gửi đăng ký ngay</button>
+          <p class="join-privacy"><i class="fas fa-shield-heart"></i>Thông tin của bạn chỉ được dùng để CLB liên hệ.</p>
+        </form>
+        <div class="msg" role="status" aria-live="polite"></div>
+      </section>
+    </section>
+
+    <aside class="join-help">
+      <i class="fas fa-circle-question"></i>
+      <div>
+        <h3>Cần tư vấn trước khi đăng ký?</h3>
+        <p>Liên hệ thầy Lê Quang Nhân hoặc Chủ nhiệm CLB Trần Tuấn Kiệt qua Zalo: <a href="tel:0976769044">0976 769 044</a>.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+<!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <h3>RMA CLUB - THPT Thống Linh</h3>
+      <p>
+        Câu lạc bộ Robot & Toán học Ứng dụng - nơi học sinh nuôi dưỡng đam mê khoa học, 
+        lập trình và sáng tạo.
+      </p>
+      <!--
+      <nav aria-label="Liên kết nhanh">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="thongtin.html">Thông tin</a></li>
+          <li><a href="duan.html">Dự án</a></li>
+          <li><a href="#thamgia">Tham gia</a></li>
+        </ul>
+      </nav>
+    -->
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+      <small> Được tạo bởi RMA CLUB - THPT Thống Linh. </small>
+    </div>
+  </footer>
+
+<script>
+document.querySelector('#submit_form').onsubmit = function(e) {
+  e.preventDefault();
+  let msgOj = document.querySelector('.msg');
+  let fullNameOj = document.querySelector('input[name="hoTen"]');
+  let classOj = document.querySelector('input[name="lopHoc"]');
+  let emailOj = document.querySelector('input[name="email"]');
+  let phoneOj = document.querySelector('input[name="soDienThoai"]');
+
+  let fullName = fullNameOj.value;
+  let classname = classOj.value;
+  let email = emailOj.value;
+  let phone = phoneOj.value;
+
+  let data = {
+    'entry.1476234119': fullName,
+    'entry.264518076': classname,
+    'entry.1520167146': email,
+    'entry.1529149578': phone
+  };
+
+  if (fullName.trim() && classname.trim() && email.trim() && phone.trim()) {
+    let queryString = new URLSearchParams(data).toString();
+    msgOj.innerHTML = '<div style="color:green;">Đang xử lý...</div>';
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScG5jeN9WJ6EH7893AkTj7H_rzH1_zYUI4L0JQFqQvB65DTxQ/formResponse', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(queryString);
+
+    msgOj.innerHTML = '<div class="alert alert-success">Gửi dữ liệu thành công!</div>';
+    fullNameOj.value = '';
+    classOj.value = '';
+    emailOj.value = '';
+    phoneOj.value = '';
+  } else {
+    msgOj.innerHTML = '<div class="alert alert-danger">Vui lòng nhập đầy đủ thông tin!</div>';
+  }
+};
+</script>
+  <script src="rma-header.js"></script>
+</body>
+</html>
